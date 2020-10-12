@@ -69,5 +69,3 @@ class PostCreateView(CreateView):
         form.instance.user = self.request.user
         Car.user_create = self.request.user
         return super().form_valid(form)
-
-# Create your views here.
