@@ -1,0 +1,42 @@
+{% extends 'c_shop/layout/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% if user.is_authenticated %}
+<form method = "POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.carTitle | as_crispy_field}}
+    <div class="row">
+        <div class="col-6">
+            {{form.year | as_crispy_field}}
+        </div>
+        <div class="col-6">
+            {{form.mileage | as_crispy_field}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            {{form.engine | as_crispy_field}}
+        </div>
+        <div class="col-6">
+            {{form.transmission | as_crispy_field}}
+        </div>
+    </div>
+    <div class = "row">
+        <div class="col-6">
+            {{form.city | as_crispy_field}}
+        </div>
+        <div class="col-6">
+            {{form.contact | as_crispy_field}}
+        </div>
+    </div>
+    {{form.desc | as_crispy_field}}
+    <div class = "col-3">
+        {{form.price | as_crispy_field}}
+    </div>
+    {{form.img | as_crispy_field}}
+    <button type="submit" class="btn btn-success">Разместить обьявление</button>
+</form>
+{% else %}
+{% url 'login' %}
+{% endif %}
+{% endblock %}

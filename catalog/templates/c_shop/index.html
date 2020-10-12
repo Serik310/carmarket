@@ -1,0 +1,72 @@
+{% extends "c_shop/layout/base.html" %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+{% block search %}
+<form method="get" class="search">
+    {% csrf_token %}
+    {{myFilter.form.carTitle | as_crispy_field}}
+    <div class = "row">
+        <div class = "col-6">
+            {{myFilter.form.engine | as_crispy_field}}
+        </div>
+        <div class = "col-6">
+            {{myFilter.form.transmission | as_crispy_field}}
+        </div>
+    </div>
+    <button type='submit' class="btn btn-primary w-100">Search</button>
+</form>
+{% endblock %}
+{% block content %}
+{% if advert_car_num == 1 %}
+{% for p in advert_car %}
+<div class="sa_block">
+    <div class="info">
+        <div>{{p.carTitle}}</div>
+        <div><i class="fas fa-money-bill"></i> {{p.price|intcomma}} $</div>
+        <div><i class = "fas fa-calendar-alt"></i> {{p.year}}</div>
+        <div><i class="fas fa-cogs"></i> {{p.transmission}}</div>
+        <div><i class="fas fa-burn"></i> {{p.engine}}</div>
+        <div><i class="fas fa-route"></i> {{p.mileage}}</div>
+        <div><i class="fas fa-phone-alt"></i> {{p.contact}}</div>
+    </div>
+    <div class="advert">
+        <a href="{{p.get_absolute_url}}">
+            <div class="advert-img">
+                <img src="{{p.img.url}}">
+            </div>
+        </a>
+    </div>
+</div>
+{% endfor %}
+{% endif %}
+<div class="car-new">
+    <div class="car-new-title">Новые обьявления</div>
+    <div class="car-list">
+        {% for p in catalog_new %}
+        <div class="car-block">
+            <a href="{{p.get_absolute_url}}">
+            <div class="car-miniblock">
+                <div class="car-new-img">
+                    <img src="{{p.img.url}}" alt="">
+                </div>
+                <div class="car-new-model">
+                    {{ p.carTitle }}
+                </div>
+                <div class="car-new-price">Цена: {{ p.price|intcomma }} $</div>
+                <div class="car-new-ch">
+                    <div class="car-new-column">
+                        <i class = "fas fa-calendar-alt"></i><div>{{ p.year }}</div>
+                        <i class="fas fa-burn"></i><div>{{ p.engine }}</div>
+                    </div>
+                    <div class="car-new-column">
+                        <i class="fas fa-cogs"></i><div>{{ p.transmission }}</div>
+                        <i class="fas fa-route"></i><div>{{ p.mileage }}</div>
+                    </div>
+                </div>
+            </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

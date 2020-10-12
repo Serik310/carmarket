@@ -1,0 +1,41 @@
+{% extends "c_shop/layout/base.html" %}
+{% load humanize %}
+{% block ctitle %}{{object.carTitle}}{% endblock %}
+{% block content %}
+<div class = "detail_car_block">
+    <div class = "detail_car_img">
+        <img src="{{object.img.url}}" alt="">
+    </div>
+    <div class = "detail_car_desc">
+        <div class = "detail_car_text">
+            <div><i class="fas fa-burn"></i> {{object.engine}}</div>
+            <div><i class="fas fa-cogs"></i> {{object.transmission}}</div>
+            <div><i class="fas fa-route"></i> {{object.mileage}}</div>
+            <div><i class = "fas fa-calendar-alt"></i> {{object.year}}</div>
+            <div><i class="fas fa-phone-alt"></i> {{object.contact}}</div>
+        </div>
+            <div class="detail_car_btn">{{object.price|intcomma}} $</div>
+        <div class = "detail_contact">
+            <form method="POST">
+                {% csrf_token %}
+                <div>
+                    <h3>Поставить вопрос по этому авто</h3>
+                </div>
+                <div>
+                    <input type="email" name="message-email" class = "form-control" placeholder="name@example.com">
+                </div>
+                <div>
+                    <textarea name="message-question" rows="7" class = "form-control" placeholder="Ваш вопрос"></textarea>
+                </div>
+                <div>
+                    <button type="submit" class = "btn btn-primary">Отправить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="detail_car_cont">
+        <div>Дополнительная информация об авто<span>{{object.user_create}}</span></div>
+        <div>{{object.desc}}</div>
+    </div>
+</div>
+{% endblock %}

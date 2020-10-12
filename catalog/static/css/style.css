@@ -1,0 +1,334 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+.header {
+    min-height: 255px;
+    max-height: 255px;
+    background-image: url('https://wallpaperaccess.com/full/936820.png');
+    background-size: auto;
+    border-bottom: 2px solid snow;
+}
+.sidebar {
+    background-color: red;
+    min-height: 450px;
+    width: 250;
+}
+.contacts {
+    display: block;
+    padding-top: 2px;
+    justify-content: center;
+    background-color: rgba(47,47,47,0.9);
+    height: 42px;
+}
+.phone {
+    display: inline-block;
+    font-size: 26px;
+    color: white;
+}
+.work_phone_time {
+    display: inline-block;
+    font-size: 16px;
+    color: #a1a1a1;
+}
+.h_title {
+    color:white;
+    display: grid;
+    margin-left: auto;
+    margin-right: auto;
+    width: 1140px;
+    grid-template-columns: 1fr 2fr 2fr;
+}
+.h_textblock {
+    margin-left: auto;
+    margin-right: auto;
+    width: 1140px;
+}
+.h_detail_car {
+    font-size: 32px;
+    font-weight: bold;
+    margin-top: 24px;
+}
+.h_cshop {
+    font-size: 24px;
+    margin-top: 14px
+}
+.h_cshop a{
+    text-decoration: none;
+    color: white;
+    transition: 1s;
+    font-size: 55px;
+}
+.h_cshop a:hover {
+    text-decoration: none;
+    color: yellow;
+    transition: 1s;
+}
+.h_cshop div:first-child {
+    color: red;
+}
+.h_cshop div:last-child {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.foot {
+    min-height: 65px;
+    background-color: #DADADA;
+    color: #979797;
+    padding-left:  250px;
+    padding-top: 20px;
+    font-size: 14px;
+}
+.content {
+    width:  100%;
+    background-color: white;
+    margin: 0px 0px;
+    box-sizing: border-box;
+}
+.sa_block {
+    display: flex;
+    height: 300px;
+    -webkit-box-shadow: 0px 10px 15px -2px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 10px 15px -2px rgba(0,0,0,0.75);
+    box-shadow: 0px 10px 15px -2px rgba(0,0,0,0.75);
+}
+.info {
+    width: 40%;
+}
+.info div {
+    margin-bottom: 10px;
+    word-wrap: break-word;
+    font-size: 20px;
+    text-align: center;
+}
+.info div:nth-child(1) {
+    font-weight: bold;
+    text-align: center;
+    font-size: 24px;
+}
+.info div:nth-child(2) {
+    font-size: 24px;
+    text-align: center;
+}
+.advert {
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    width: 60%;
+    color: white;
+}
+.advert img {
+    height: 100%;
+    width: 100%;
+    max-height: 300px;
+}
+.bottom-right-image {
+    position: absolute;
+    bottom: 8px;
+    left: 16px;
+    background-color: rgba(47,47,47,0.4);
+    font-size: 24px;
+}
+.bottom-left-image {
+    position: absolute;
+    bottom: 8px;
+    right: 16px;
+    background-color: rgba(47,47,47,0.4);
+    font-size: 24px;
+    border-radius: 10%;
+}
+.t_style {
+    padding-left: 20px;
+}
+.s_button {
+    width: 100%;
+}
+.s_space {
+    padding: auto;
+}
+.car-new {
+    display: block;
+    min-height: 100px;
+    margin-top: 10px;
+}
+.car-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+}
+.car-miniblock {
+    background-color: #f6f7f7;
+    padding: 6px;
+    border: 1px solid #dcdedf;
+    transition: 0.5s;
+}
+.car-miniblock:hover {
+    background-color: rgb(238, 238, 255);
+    transition: 0.5s;
+}
+.car-miniblock:hover .car-new-img img {
+    border-radius: 5%;
+    transition: 0.5s;
+}
+.car-new-img img{
+    max-height: 300px;
+    width: 100%;
+    min-height: 300px;
+    transition: 0.5s;
+}
+.car-new-model {
+    font-size: 24px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    text-align: center;
+}
+.car-new-ch {
+    display: flex;
+    text-align: center;
+    font-size: 20px;
+    border-top: 1px solid #979797;
+}
+.car-new-column {
+    flex: 50%;
+}
+.car-new-column:first-child {
+    border-right: 1px solid #979797;
+}
+.car-new-column div {
+    border-bottom: 1px solid #979797;
+}
+.car-new-price {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+.car-block {
+    box-sizing: border-box;
+    width: 100%;
+}
+.cont-block {
+    padding: 6px;
+    border: 1px solid #979797;
+    background-color: rgb(241, 241, 241);
+}
+.car-new-title {
+    font-size: 14px;
+    text-align: center;
+    background-color: black;
+    color:white;
+    font-weight: bold;
+}
+.car-block a {
+    text-decoration: none;
+    color: black
+}
+.car-block a:hover {
+    text-decoration: none;
+    color: black;
+}
+.sa_block:hover{
+    transition: 0.5s;
+    background-color: rgb(238, 238, 255) ;
+}
+.detail_car_block {
+    display: grid;
+    grid-template-areas: 
+    "im ds"
+    "cs cs";
+    grid-template-columns: 1fr 1fr;
+}
+.detail_car_img {
+    grid-area: im;
+}
+.detail_car_img  img{
+    min-height: 312px;
+    max-width: 550px;
+    min-width: 100%;
+    max-height: 312px;
+}
+.detail_car_desc {
+    grid-area: ds;
+}
+.detail_car_cont {
+    grid-area: cs;
+    word-wrap: break-word; 
+}
+.detail_car_desc {
+    padding: 10px;
+    border: 1px solid #979797;
+    margin-left: 5px;
+    background-color: white;
+    font-size: 24px;
+}
+.detail_car_btn {
+    text-align: center;
+}
+.detail_car_btn {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    font-size: 36px;
+    font-weight: bold;
+    border: 1px solid #90ffbe;
+    color: #90ffbe;
+    transition: 0.5s;
+}
+.detail_car_btn:hover {
+    color: #008839;
+    background-color: #90ffbe;
+    border: 1px solid #008839;
+    transition: 0.5s;
+}
+.search label{
+    display: block;
+}
+.registration {
+    display: inline-block;
+    margin-left: 30%;
+}
+.registration a {
+    text-decoration: none;
+    color: white;
+}
+.registration a:first-child {
+    margin-right: 110px;
+}
+.registration span {
+    color: white;
+    margin-right: 40px;
+}
+.detail_car_text div {
+    border-bottom: 2px solid #979797;
+}
+.detail_car_btn div {
+    font-size: 46px;
+    font-weight: bold;
+
+}
+.detail_car_cont {
+    background-color: white;
+    border: 2px solid #979797;
+    margin-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+}
+.detail_car_cont div:first-child{
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom: 1px solid #979797;
+}
+.detail_car_cont div span{
+    color: #979797;
+    font-weight: normal;
+    float: right;
+}
+.detail_contact {
+    border: 1px solid #979797;
+    border-radius: 1%;
+}
+.detail_contact div {
+    margin: 5px;
+}
+.detail_contact h3 {
+    color: #979797;
+}
