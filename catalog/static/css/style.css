@@ -4,22 +4,62 @@ html, body {
 }
 .header {
     min-height: 255px;
-    max-height: 255px;
     background-image: url('https://wallpaperaccess.com/full/936820.png');
     background-size: auto;
     border-bottom: 2px solid snow;
 }
+.p_header {
+    background-color: rgba(47,47,47,0.9);
+    position: absolute;
+    height: 42px;
+    width: 100%;
+}
 .sidebar {
-    background-color: red;
-    min-height: 450px;
-    width: 250;
+    width: 30%;
+    border: 1px solid #979797;
+    background-color: rgb(131, 131, 131);
+}
+.menu ul {
+    padding: 0px;
+    margin-bottom: 0px;
+}
+.menu a {
+    display: block;
+    color: white;
+    font-size: 24px;
+}
+.menu a:hover {
+    color: white;
+    text-decoration: none;
+}
+.menu li:hover {
+    background-color: rgb(105, 105, 105);
+    transition: 0.5s;
+}
+.menu i {
+    display: inline-block;
+    min-width: 40px;
+    text-align: center;
+}
+.menu span {
+    padding-left: 20px;
+}
+.menu li{
+    border-bottom: 1px solid #979797;
+    list-style-type: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    transition: 0.5s;
 }
 .contacts {
     display: block;
     padding-top: 2px;
     justify-content: center;
-    background-color: rgba(47,47,47,0.9);
     height: 42px;
+}
+.parent {
+    display: flex;
+    flex-wrap: wrap;
 }
 .phone {
     display: inline-block;
@@ -36,8 +76,7 @@ html, body {
     display: grid;
     margin-left: auto;
     margin-right: auto;
-    width: 1140px;
-    grid-template-columns: 1fr 2fr 2fr;
+    grid-template-columns: 2fr 2fr 2fr;
 }
 .h_textblock {
     margin-left: auto;
@@ -57,33 +96,56 @@ html, body {
     text-decoration: none;
     color: white;
     transition: 1s;
-    font-size: 55px;
+    font-size: 45px;
 }
 .h_cshop a:hover {
     text-decoration: none;
     color: yellow;
     transition: 1s;
 }
+#head_text {
+    font-size: 16px;
+}
 .h_cshop div:first-child {
     color: red;
 }
-.h_cshop div:last-child {
-    font-weight: bold;
-    text-transform: uppercase;
+.search_form input{
+    margin-top: 70px;
 }
+
 .foot {
     min-height: 65px;
     background-color: #DADADA;
     color: #979797;
+    width: 100%;
     padding-left:  250px;
     padding-top: 20px;
     font-size: 14px;
 }
 .content {
-    width:  100%;
+    width:  70%;
     background-color: white;
     margin: 0px 0px;
     box-sizing: border-box;
+}
+.login_form {
+    max-width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+}
+.login_form p {
+    text-align: center;
+}
+.login_form label {
+    color: white;
+}
+#my_btn {
+    background-color: white;
+
+}
+#my_btn:hover {
+    background-color: tomato;
 }
 .sa_block {
     display: flex;
@@ -114,13 +176,13 @@ html, body {
     display: inline-block;
     position: relative;
     text-align: center;
-    width: 60%;
+    width: 100%;
     color: white;
 }
 .advert img {
     height: 100%;
     width: 100%;
-    max-height: 300px;
+    max-height: 400px;
 }
 .bottom-right-image {
     position: absolute;
@@ -128,6 +190,9 @@ html, body {
     left: 16px;
     background-color: rgba(47,47,47,0.4);
     font-size: 24px;
+}
+.search_row div{
+    text-align: center;
 }
 .bottom-left-image {
     position: absolute;
@@ -153,8 +218,8 @@ html, body {
 }
 .car-list {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
 }
 .car-miniblock {
     background-color: #f6f7f7;
@@ -171,9 +236,9 @@ html, body {
     transition: 0.5s;
 }
 .car-new-img img{
-    max-height: 300px;
+    max-height: 150px;
     width: 100%;
-    min-height: 300px;
+    min-height: 150px;
     transition: 0.5s;
 }
 .car-new-model {
@@ -187,21 +252,21 @@ html, body {
     text-align: center;
     font-size: 20px;
     border-top: 1px solid #979797;
+    padding-top: 10px;
 }
 .car-new-column {
     flex: 50%;
 }
-.car-new-column:first-child {
-    border-right: 1px solid #979797;
+.desc {
+    padding-top: 10px;
+    border-top: 1px solid #979797;
+    color: red;
+    padding-bottom: 10px;
 }
 .car-new-column div {
     border-bottom: 1px solid #979797;
 }
-.car-new-price {
-    font-size: 24px;
-    text-align: center;
-    margin-bottom: 15px;
-}
+
 .car-block {
     box-sizing: border-box;
     width: 100%;
@@ -283,14 +348,15 @@ html, body {
 }
 .registration {
     display: inline-block;
-    margin-left: 30%;
+    padding-top: 10px;
 }
 .registration a {
     text-decoration: none;
     color: white;
 }
-.registration a:first-child {
-    margin-right: 110px;
+.registration div {
+    display: inline-block;
+    height: 38.4px;
 }
 .registration span {
     color: white;
@@ -331,4 +397,139 @@ html, body {
 }
 .detail_contact h3 {
     color: #979797;
+}
+#username {
+    color:yellow;
+}
+.search .form-group {
+    display: inline-block;
+}
+.search button {
+    display: inline-block;
+}
+#div_id_carTitle label {
+    visibility: hidden;
+}
+.profile_advert {
+    border-right: 1px solid green;
+}
+.profile_text {
+    text-align: center;
+    border-bottom: 1px solid violet;
+}
+#profile_block {
+    width: 100%;
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+
+/* Slideshow container */
+.slideshow-container {
+  position: relative;
+  margin: auto;
+}
+
+/* Hide the images by default */
+.mySlides {
+  display: none;
+}
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 36px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 16px;
+  width: 100%;
+  text-align: center;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade_my {
+  -webkit-animation-name: fade_my;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade_my;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade_my {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+@keyframes fade_my {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+.shop ul {
+    list-style-type: none;
+    padding-left: 0px;
+    margin-bottom: 0;
+}
+.shop li:first-child {
+    border-top: 2px solid #717171;
+}
+.shop li {
+    border-bottom: 2px solid #717171;
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+.shop_img img {
+    max-width: 200px;
+    min-width: 200px;
+    max-height: 115px;
+    min-height: 115px;
+}
+.shop_img {
+    border-right:2px solid #717171;
+}
+.flexing {
+    display: flex;
+    height: 120px;
+}
+.shop_desc {
+    width: 300px;
+    border-right:2px solid #717171;
+}
+.shop_desc p {
+    margin: 0px;
+}
+.shop_desc p:first-child {
+    font-weight: bold;
+    font-size: 24px;
+    border-bottom: 2px solid #717171;
+}
+.shop_desc p:nth-child(2) {
+    border-bottom: 2px solid #717171;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.shop_desc p:last-child {
+    font-size: 24px;
+}
+.shop_btn {
+    margin: auto;
+}
+.about_h {
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-bottom: #717171 3px solid;
 }

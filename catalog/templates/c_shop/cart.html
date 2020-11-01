@@ -1,0 +1,15 @@
+{% extends 'c_shop/layout/base.html' %}
+{% load humanize %}
+{% block content %}
+<div class="cart">
+    <div> $ {{order.get_cart_total | intcomma}}</div>
+    <div> {{order.get_cart_items}}</div>
+    <ul>
+        {% for items in items %}
+        <li>
+            <div>{{items.product.carTitle}}</div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
