@@ -1,50 +1,37 @@
 {% extends "c_shop/layout/base.html" %}
+{% load static %}
 {% load humanize %}
 {% load crispy_forms_tags %}
 {% block search %}
-<form method="get" class="search">
-    {% csrf_token %}
-    {{myFilter.form.carTitle | as_crispy_field}}
-    <div class = "row">
-        <div class = "col-6">
-            {{myFilter.form.engine | as_crispy_field}}
-        </div>
-        <div class = "col-6">
-            {{myFilter.form.transmission | as_crispy_field}}
-        </div>
-    </div>
-    <button type='submit' class="btn btn-primary w-100">Search</button>
-</form>
+<input id = "search_here" class = "form-control" placeholder = "Введите название автомобиля...">
 {% endblock %}
 {% block content %}
 {% if advert_car_num == 1 %}
-{% for p in advert_car %}
-<div class="sa_block">
-    <div class="info">
-        <div>{{p.carTitle}}</div>
-        <div><i class="fas fa-money-bill"></i> {{p.price|intcomma}} $</div>
-        <div><i class = "fas fa-calendar-alt"></i> {{p.year}}</div>
-        <div><i class="fas fa-cogs"></i> {{p.transmission}}</div>
-        <div><i class="fas fa-burn"></i> {{p.engine}}</div>
-        <div><i class="fas fa-route"></i> {{p.mileage}}</div>
-        <div><i class="fas fa-phone-alt"></i> {{p.contact}}</div>
-    </div>
-    <div class="advert">
-        <a href="{{p.get_absolute_url}}">
-            <div class="advert-img">
-                <img src="{{p.img.url}}">
-            </div>
-        </a>
-    </div>
-</div>
+<div class="advert">
+    <div class="slideshow-container">
+{% for i in advert_car %}
+{% for l in photos %}
+<a href="{% url 'core:product' i.id %}">
+        <div class="mySlides fade_my">
+          <img src="{{l.image.url}}" style="width:100%">
+          <div class="text">{{l.car.carTitle}}</div>
+        </div>
+</a>
 {% endfor %}
+{% endfor %}
+<div style="text-align:center">
+    {% for count_img in photos_num %}
+    <span class="dot" onclick="currentSlide('{{count_img}}')"></span>
+    {% endfor %}
+</div>
+</div>
 {% endif %}
 <div class="car-new">
     <div class="car-new-title">Новые обьявления</div>
-    <div class="car-list">
+    <div class="car-list" id = "box">
         {% for p in catalog_new %}
         <div class="car-block">
-            <a href="{{p.get_absolute_url}}">
+            <a href="{% url 'core:product' p.id %}">
             <div class="car-miniblock">
                 <div class="car-new-img">
                     <img src="{{p.img.url}}" alt="">
@@ -52,21 +39,49 @@
                 <div class="car-new-model">
                     {{ p.carTitle }}
                 </div>
-                <div class="car-new-price">Цена: {{ p.price|intcomma }} $</div>
-                <div class="car-new-ch">
+                <div class = "desc">
+                    {{ p.desc }}
+                </div>
+                <div class = "car-new-ch">
                     <div class="car-new-column">
-                        <i class = "fas fa-calendar-alt"></i><div>{{ p.year }}</div>
-                        <i class="fas fa-burn"></i><div>{{ p.engine }}</div>
+                        {{ p.price | intcomma }} $
                     </div>
+                </a>
                     <div class="car-new-column">
-                        <i class="fas fa-cogs"></i><div>{{ p.transmission }}</div>
-                        <i class="fas fa-route"></i><div>{{ p.mileage }}</div>
+                        <button data-product = {{p.id}} data-action = "add" class = "btn btn-danger update-cart">В корзину</button>
                     </div>
                 </div>
             </div>
-            </a>
         </div>
         {% endfor %}
     </div>
 </div>
+{% endblock %}
+{% block scripts %}
+<script>
+    var slideIndex = 1;
+showSlides(slideIndex);
+
+// Thumbnail image controls
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+}
+</script>
+<script type="text/javascript" src ="{% static 'js/cart.js' %}"></script>
 {% endblock %}

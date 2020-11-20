@@ -1,0 +1,41 @@
+{% extends "c_shop/layout/base.html" %}
+{% load humanize %}
+{% load static %}
+{% block content %}
+<div class="shop">
+<ul>
+    {% for p in cars %}
+    <li class = "flexing">
+        <div class="shop_img">
+            <img src="{{p.img.url}}" alt="">
+        </div>
+        <div class="shop_desc">
+            <p>{{p.carTitle}}</p>
+            <p>{{p.year}}</p>
+            <p>{{p.price | intcomma}} $</p>
+        </div>
+        <div class = "shop_btn">
+            <button data-product = {{p.id}} data-action = "add" class = "btn btn-danger update-cart">В корзину</button>
+            <a class = "btn btn-primary" href="{% url 'core:product' p.id %}">Подробнее</a>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+</div>
+<div class="row_shop">
+    <div class= "pag_shop">
+        <ul class="pagination_my">
+            {% for page in cars.paginator.page_range %}
+                {% if page == cars.number %}
+                    <li class="current"><a href="{% url 'core:shop' page %}">{{ page }}</a></li>
+                {% else %}
+                    <li><a href="{% url 'core:shop' page %}">{{ page }}</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script type="text/javascript" src ="{% static 'js/cart.js' %}"></script>
+{% endblock %}
