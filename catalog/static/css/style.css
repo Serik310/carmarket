@@ -306,10 +306,8 @@ html, body {
     grid-area: im;
 }
 .detail_car_img  img{
-    min-height: 312px;
-    max-width: 550px;
-    min-width: 100%;
-    max-height: 312px;
+    height: 200px;
+    width: 300px;
 }
 .detail_car_desc {
     grid-area: ds;
@@ -398,7 +396,7 @@ html, body {
 .detail_contact h3 {
     color: #979797;
 }
-#username {
+#username_top {
     color:yellow;
 }
 .search .form-group {
@@ -526,6 +524,30 @@ html, body {
 }
 .shop_btn {
     margin: auto;
+}
+.pagination_my li{
+    border: none;
+    display: inline-block;
+}
+.pagination_my a {
+    font-size: large;
+}
+.pagination_my {
+    padding: 0;
+    margin-left: auto;
+    display: inline;
+}
+.pagination_my ul {
+    margin-bottom: 0px;
+}
+.pag_shop {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+.current a{
+    color: gray;
+    pointer-events: none;
 }
 .about_h {
     font-size: 24px;

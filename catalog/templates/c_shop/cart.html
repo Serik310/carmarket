@@ -1,15 +1,37 @@
 {% extends 'c_shop/layout/base.html' %}
 {% load humanize %}
+{% load static %}
 {% block content %}
-<div class="cart">
+<div class="shop">
     <div> $ {{order.get_cart_total | intcomma}}</div>
     <div> {{order.get_cart_items}}</div>
     <ul>
-        {% for items in items %}
-        <li>
-            <div>{{items.product.carTitle}}</div>
+        {% for p in items %}
+        <li class = "flexing">
+            <div class="shop_img">
+                <img src="{{p.product.img.url}}" alt="">
+            </div>
+            <div class="shop_desc">
+                <p>{{p.product.carTitle}}</p>
+                <p>{{p.product.year}}</p>
+                <p>{{p.product.price | intcomma}} $</p>
+            </div>
+            <div class = "shop_btn">
+                <a class = "btn btn-primary" href="{% url 'core:product' p.product.id %}">Подробнее</a>
+                <button data-product="{{p.product.id}}" data-action="remove" class = "btn btn-danger update-cart">Убрать</button>
+            </div>
         </li>
         {% endfor %}
     </ul>
 </div>
+{% endblock %}
+{% block scripts %}
+<script type="text/javascript" src ="{% static 'js/cart.js' %}"></script>
+<script type="text/javascript">
+    var shipping = '{{order.shipping}}'
+
+    if (shipping == 'False') {
+        document.getElementById('shipping-info').innerHTML = ''
+    }
+</script>
 {% endblock %}

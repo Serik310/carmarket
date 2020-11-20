@@ -12,8 +12,10 @@ urlpatterns = [
     path('register/',views.register_page, name = 'register'),
     path('product/new/',PostCreateView.as_view(), name = 'create'),
     path('profile/',views.profile, name = 'profile'),
-    path('shop/',views.shop, name = 'shop'),
     path('about/',views.about, name = 'about'),
     path('update_item/',views.updateItem, name ='update_item'),
     path('cart/', views.cart, name = 'cart'),
+    path('post/',views.personal_posts, name = 'personal_posts'),
+    path('shop/<page_number>/',views.shop , name = 'shop'),
+    path('cart/checkout',views.checkout, name = 'checkout')
 ]

@@ -5,6 +5,9 @@
 <div class = "detail_car_block">
     <div class = "detail_car_img">
         <img src="{{current_product.img.url}}" alt="">
+        {% for i in photo %}
+        <img src="{{i.image.url}}">
+        {% endfor %}
     </div>
     <div class = "detail_car_desc">
         <div class = "detail_car_text">

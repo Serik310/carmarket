@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
         <script src="https://kit.fontawesome.com/b3971aea5c.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        {% block head %}{% endblock %}
         <script type="text/javascript">
             var user = '{{request.user}}'
             
@@ -46,11 +47,8 @@
                 <div class="registration col-4">
                     {% if user.is_authenticated %}
                     <div><a href="{% url 'logout' %}?next={{request.path}}">Выйти</a></div>
-                    <div><a id = "username" href="{% url 'core:profile' %}">{{user.get_username}}</a></div>
+                    <div><a id = "username_top" href="{% url 'core:profile' %}">{{user.get_username}}</a></div>
                     <div><a href="{% url 'core:create'%}?next={{request.path}}">Разместить обьявление</a></div>
-                    {% else %}
-                    <div><a href="{% url 'login' %}?next={{request.path}}">Войти</a></div>
-                    <div><a href="{% url 'core:register' %}">Регистрация</a></div>
                     {% endif %}
                 </div>
             </div>
@@ -76,14 +74,14 @@
         <div class="sidebar">
                 <div class="menu">
                     <ul>
-                        <li><a href="{% url 'core:shop' %}"><i class="fas fa-box-open"></i><span>Магазин</span></a></li>
+                        <li><a href="{% url 'core:shop' 1 %}"><i class="fas fa-box-open"></i><span>Магазин</span></a></li>
                         <li><a href="{% url 'core:about' %}"><i class="fas fa-address-book"></i><span>Про нас</span></a></li>
                     </ul>
             </div>
             {% if user.is_authenticated %}
             <div class="menu">
                 <ul>
-                    <li><a href="{% url 'core:cart' %}"><i class="fas fa-briefcase"></i><span>Мои обьявление</span></a></li>
+                    <li><a href="{% url 'core:personal_posts' %}"><i class="fas fa-briefcase"></i><span>Мои обьявление</span></a></li>
                     <li><a href="{% url 'core:cart' %}"><i class="fas fa-shopping-basket"></i><span>Корзина</span></a></li>
                 </ul>
             </div>
@@ -91,11 +89,17 @@
             <div class="login_form">
                 <form method="post" action="{% url 'core:login' %}">
                     {% csrf_token %}
-                    <input id='username' name='username' type='text'>
-                    <input id='password' name='password' type='password'>
+                    <input id='username' name='username' type='text' class = 'form-control' placeholder="Логин">
+                    <input id='password' name='password' type='password' class = 'form-control' placeholder="Пароль">
                     <p><input type="submit" value="Войти" class = "btn" id = "my_btn"></p>
                 </form>
             </div>
+            <div class = "menu">
+                <ul>
+                    <li style="text-align: center; border-top: 1px solid #979797;">
+                        <a href="{% url 'core:register' %}">Регистрация</a></div>
+                    </li>
+                </ul>
             {% endif %}
         </div>
         <div class = "content">

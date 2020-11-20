@@ -47,6 +47,7 @@ class Car(models.Model):
     city = models.CharField(max_length=150, verbose_name= 'Город')
     transmission = models.CharField(max_length=10, verbose_name= 'Коробка Передач', choices=TRANSMISSION_TYPE, default='M')
     adverted = models.BooleanField("Is adverted",default=False)
+    digital = models.BooleanField(default=False, null=True, blank=False)
     class Meta(object):
         ordering = ['-date_publication']
     def __str__(self):
@@ -78,6 +79,16 @@ class Order(models.Model):
     def get_cart_items(self):
         total = self.order_item_set.all().count()
         return total
+    
+    @property
+    def shipping(self):
+        shipping = False
+        order_items = self.order_item_set.all()
+        for i in order_items:
+            if i.product.digital == False:
+                shipping = True
+
+        return shipping
 
 class Order_item(models.Model):
     product = models.ForeignKey(Car,on_delete=models.SET_NULL,null=True)
@@ -91,14 +102,16 @@ class Order_item(models.Model):
 
 
 class Ship_adress(models.Model):
+    first_name = models.CharField(max_length=200,null = False)
+    last_name = models.CharField(max_length=200,null = False)
     customer = models.ForeignKey(Customer,on_delete=models.SET_NULL, null=True )
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
     adress = models.CharField(max_length=200, null=False) 
     city = models.CharField(max_length=200, null=False)  
     state = models.CharField(max_length=200, null=False)  
-    zipcode = models.CharField(max_length=200, null=False)  
     date_added = models.DateTimeField(auto_now_add=True)  
-
+    phone_regex = RegexValidator(regex=r"^\+(?:[0-9]●?){6,14}[0-9]$", message=("Неверный формат"))
+    phone_number = models.CharField(validators=[phone_regex], verbose_name=("Номер телефона"), max_length=17, blank=True, null=True)
     def __str__(self):
         return self.adress
 

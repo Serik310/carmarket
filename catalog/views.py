@@ -11,8 +11,10 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.core.mail import send_mail
+from django.core.paginator import Paginator
 from django.contrib.auth import login, authenticate
 from django.http import JsonResponse
+from django.db.models import Q
 
 from catalog.models import Car, CarImage, Order, Order_item
 from catalog.forms import UserRegistrationForm, LoginForm
@@ -29,10 +31,11 @@ def login_view(request):
                 login(request, user) 
                 return redirect('/')
 
+
 def index(request):
-    catalog_new = Car.objects.all()
-    advert_car = Car.objects.filter(adverted = True)
-    advert_car_num = Car.objects.filter(adverted = True).count()
+    catalog_new = Car.objects.all() [:9]
+    advert_car = Car.objects.filter(adverted=True)
+    advert_car_num = Car.objects.filter(adverted=True).count()
     qs_json = Car.objects.annotate(car_name=Concat(
         'carTitle__carBrand',
         Value(' '),
@@ -58,7 +61,8 @@ def index(request):
 def car_detail_view(request, product_id):
     current_product = Car.objects.get(pk = product_id)
     photos_detail = CarImage.objects.filter(car = current_product)
-    context = {'current_product': current_product,
+    context = {'current_product': current_product, 
+    'photo': photos_detail,
     }
     return render(
         request,
@@ -100,10 +104,11 @@ def profile(request):
         'registration/profile.html',
         context,
     )
-def shop(request):
-    cars = Car.objects.all()
+def shop(request, page_number=1):
+    all_cars = Car.objects.all()
+    current_page = Paginator(all_cars,2)
     context = {
-        'cars':cars,
+        'cars':current_page.page(page_number),
     }
     return render(
         request,
@@ -127,7 +132,15 @@ def cart(request):
     context = {'items': items, 'order': order}
     return render(request, 'c_shop/cart.html', context)
 
-
+def checkout(request):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer = customer, complete = False)
+        items = order.order_item_set.all()
+    else:
+        items = []
+    context = {'items': items, 'order': order}
+    return render(request, 'c_shop/checkout.html',context)
 def updateItem(request):
     data = json.loads(request.body)
     productId = data['productId']
@@ -141,5 +154,13 @@ def updateItem(request):
     order, created = Order.objects.get_or_create(customer=customer, complete=False)
     order_item, created = Order_item.objects.get_or_create(order = order, product = product)
 
+    if action == 'remove':
+        order_item.delete()
     return JsonResponse('Item was added', safe=False)
 
+def personal_posts(request):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        post = Car.objects.filter(user_create = customer)
+        context = {'post': post}
+    return render(request, "c_shop/post.html", context)

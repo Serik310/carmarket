@@ -22,6 +22,19 @@
     {% endfor %}
 </ul>
 </div>
+<div class="row_shop">
+    <div class= "pag_shop">
+        <ul class="pagination_my">
+            {% for page in cars.paginator.page_range %}
+                {% if page == cars.number %}
+                    <li class="current"><a href="{% url 'core:shop' page %}">{{ page }}</a></li>
+                {% else %}
+                    <li><a href="{% url 'core:shop' page %}">{{ page }}</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+</div>
 {% endblock %}
 {% block scripts %}
 <script type="text/javascript" src ="{% static 'js/cart.js' %}"></script>
