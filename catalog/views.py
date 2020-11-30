@@ -31,6 +31,25 @@ def login_view(request):
                 login(request, user) 
                 return redirect('/')
 
+@require_POST
+def registration_view(request):
+    form = UserRegistrationForm(request.POST)
+    if form.is_valid():
+        cd = form.changed_data
+        username = cd['username']
+        email = cd['email']
+        password = cd['password']
+        name = cd['username']
+        user = form.save()
+        messages.success(request, f'Account created for {username}!')
+        return redirect('catalog')
+
+def registration_page(request):
+    context = {}
+    return render(
+        request,
+        'registration/register.html',
+        context)
 
 def index(request):
     catalog_new = Car.objects.all() [:9]
@@ -61,30 +80,15 @@ def index(request):
 def car_detail_view(request, product_id):
     current_product = Car.objects.get(pk = product_id)
     photos_detail = CarImage.objects.filter(car = current_product)
+    photos_num = [x+1 for x in range(photos_detail.count())]
     context = {'current_product': current_product, 
     'photo': photos_detail,
+    'photos_num': photos_num
     }
     return render(
         request,
         'c_shop/product.html',
         context
-    )
-
-def register_page(request):
-    if request.method == 'POST':
-        form = UserRegistrationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            messages.success(request, f'Account created for {username}!')
-            return redirect('catalog')
-    else:
-        form = UserRegistrationForm()
-    context = {'form':form}
-    return render(
-        request,
-        'registration/register.html',
-        context,
     )
 
 class PostCreateView(CreateView):
@@ -124,7 +128,7 @@ def about(request):
 def cart(request):
 
     if request.user.is_authenticated:
-        customer = request.user.customer
+        customer = request.user
         order, created = Order.objects.get_or_create(customer = customer, complete = False)
         items = order.order_item_set.all()
     else:
@@ -134,13 +138,17 @@ def cart(request):
 
 def checkout(request):
     if request.user.is_authenticated:
-        customer = request.user.customer
+        customer = request.user
         order, created = Order.objects.get_or_create(customer = customer, complete = False)
         items = order.order_item_set.all()
+        cartItems = order.get_cart_items
     else:
         items = []
-    context = {'items': items, 'order': order}
+        order = {'get_cart_total':0, 'get_cart_items': 0, 'shipping':False}
+        cartItems = order['get_cart_items']
+    context = {'items': items, 'order': order, 'cartItems': cartItems}
     return render(request, 'c_shop/checkout.html',context)
+
 def updateItem(request):
     data = json.loads(request.body)
     productId = data['productId']
@@ -149,7 +157,7 @@ def updateItem(request):
     print('Action: ', action)
     print('ProductId: ', productId)
     
-    customer = request.user.customer
+    customer = request.user
     product = Car.objects.get(id = productId)
     order, created = Order.objects.get_or_create(customer=customer, complete=False)
     order_item, created = Order_item.objects.get_or_create(order = order, product = product)
@@ -160,7 +168,7 @@ def updateItem(request):
 
 def personal_posts(request):
     if request.user.is_authenticated:
-        customer = request.user.customer
+        customer = request.user
         post = Car.objects.filter(user_create = customer)
         context = {'post': post}
     return render(request, "c_shop/post.html", context)

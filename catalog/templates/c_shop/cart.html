@@ -3,8 +3,10 @@
 {% load static %}
 {% block content %}
 <div class="shop">
-    <div> $ {{order.get_cart_total | intcomma}}</div>
-    <div> {{order.get_cart_items}}</div>
+    <div class = "cart_info_block">
+        <div class = "cart_info"> Стоимость: {{order.get_cart_total | intcomma}} $</div>
+        <div class = "cart_info"> Количество: {{order.get_cart_items}}</div>
+    </div>
     <ul>
         {% for p in items %}
         <li class = "flexing">
@@ -23,6 +25,9 @@
         </li>
         {% endfor %}
     </ul>
+    <div class = "cart_checkout">
+        <a class="btn btn-success cart_btn_checkout" href="{% url 'core:checkout' %}">Оформить заказ</a>
+    </div>
 </div>
 {% endblock %}
 {% block scripts %}

@@ -1,39 +1,26 @@
 {% extends "c_shop/layout/base.html" %}
 {% load humanize %}
+{% load static %}
 {% block ctitle %}{{current_product.carTitle}}{% endblock %}
 {% block content %}
-<div class = "detail_car_block">
-    <div class = "detail_car_img">
+<div class="detail_car_block">
+    <div class="detail_car_img">
         <img src="{{current_product.img.url}}" alt="">
         {% for i in photo %}
         <img src="{{i.image.url}}">
         {% endfor %}
     </div>
-    <div class = "detail_car_desc">
-        <div class = "detail_car_text">
+    <div class="detail_car_desc">
+        <div class="detail_car_text">
             <div><i class="fas fa-burn"></i> {{current_product.engine}}</div>
             <div><i class="fas fa-cogs"></i> {{current_product.transmission}}</div>
             <div><i class="fas fa-route"></i> {{current_product.mileage}}</div>
-            <div><i class = "fas fa-calendar-alt"></i> {{current_product.year}}</div>
+            <div><i class="fas fa-calendar-alt"></i> {{current_product.year}}</div>
             <div><i class="fas fa-phone-alt"></i> {{current_product.contact}}</div>
         </div>
-            <div class="detail_car_btn">{{current_product.price|intcomma}} $</div>
-        <div class = "detail_contact">
-            <form method="POST">
-                {% csrf_token %}
-                <div>
-                    <h3>Поставить вопрос по этому авто</h3>
-                </div>
-                <div>
-                    <input type="email" name="message-email" class = "form-control" placeholder="name@example.com">
-                </div>
-                <div>
-                    <textarea name="message-question" rows="7" class = "form-control" placeholder="Ваш вопрос"></textarea>
-                </div>
-                <div>
-                    <button type="submit" class = "btn btn-primary">Отправить</button>
-                </div>
-            </form>
+        <div class="detail_car_btn">{{current_product.price|intcomma}} $</div>
+        <div class="detail_car_btn_cart">
+            <button data-product = {{current_product.id}} data-action = "add" class = "btn btn-danger update-cart">В корзину</button>
         </div>
     </div>
     <div class="detail_car_cont">
@@ -41,4 +28,7 @@
         <div>{{current_product.desc}}</div>
     </div>
 </div>
+{% endblock %}
+{% block scripts %}
+<script type="text/javascript" src ="{% static 'js/cart.js' %}"></script>
 {% endblock %}
