@@ -306,8 +306,16 @@ html, body {
     grid-area: im;
 }
 .detail_car_img  img{
-    height: 200px;
-    width: 300px;
+    height: 300px;
+    width: 100%;
+    border-radius: 2px;
+    margin-top: 2px;
+}
+.detail_car_btn_cart {
+    text-align: center;
+}
+.detail_car_btn_cart button {
+    width: 100%;
 }
 .detail_car_desc {
     grid-area: ds;
@@ -554,4 +562,26 @@ html, body {
     font-weight: bold;
     text-transform: uppercase;
     border-bottom: #717171 3px solid;
+}
+.cart_info_block {
+    display: flex;
+    align-items: stretch;
+    flex-grow: 1;
+    background-color:black;
+    height: 35px;
+}
+.cart_info {
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: 24px;
+}
+.cart_info:first-child {
+    border-right: 2px solid white;
+}
+.cart_btn_checkout {
+    margin-top: 10px;
+}
+.cart_checkout {
+    text-align: center;
 }

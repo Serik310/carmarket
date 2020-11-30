@@ -8,13 +8,6 @@ from django.contrib.auth.models import User
 from phone_field import PhoneField
 from django.core.validators import RegexValidator
 from django.db.models.signals import pre_save
-class Customer(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null = True, blank= True)
-    name = models.CharField(max_length=200, null=True)
-    email = models.CharField(max_length=200,null = True)
-
-    def __str__(self):
-        return self.name
 class CarType(models.Model):
     carBrand = models.CharField(max_length=150, verbose_name='Марка', default=None, null=True, blank=True)
     carModel = models.CharField(max_length=100, verbose_name='Модель', default=None, null=True, blank=True)
@@ -34,7 +27,7 @@ class Car(models.Model):
     )
     id = models.AutoField(primary_key=True, verbose_name='id')
     img = models.ImageField(verbose_name= 'Главная фотка',null = True, upload_to='images/%Y/%m/%d/', height_field=None,width_field=None,max_length=255)
-    user_create = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
+    user_create = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     year = models.PositiveIntegerField(verbose_name = 'Год выпуска')
     carTitle = models.ForeignKey('CarType',on_delete=models.SET_NULL, null=True, verbose_name='Название')
     desc = models.TextField(max_length=1500,verbose_name= 'Описание', null=True, blank=True)
@@ -61,7 +54,7 @@ class CarImage(models.Model):
         return (str(self.car.carTitle) + ' ' + str(self.car.id))
 
 class Order(models.Model):
-    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
+    customer = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
     date_ordered = models.DateTimeField(auto_now_add= True)
     complete = models.BooleanField(default=False,null=True,blank=False)
     transaction_id = models.CharField(max_length=200, null=True)
@@ -104,7 +97,6 @@ class Order_item(models.Model):
 class Ship_adress(models.Model):
     first_name = models.CharField(max_length=200,null = False)
     last_name = models.CharField(max_length=200,null = False)
-    customer = models.ForeignKey(Customer,on_delete=models.SET_NULL, null=True )
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
     adress = models.CharField(max_length=200, null=False) 
     city = models.CharField(max_length=200, null=False)  

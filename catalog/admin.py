@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Car, CarType,CarImage, Order, Order_item, Ship_adress,Customer
+from .models import Car, CarType,CarImage, Order, Order_item, Ship_adress
 
 class CarImageAdmin(admin.StackedInline):
     model = CarImage
@@ -18,5 +18,4 @@ class CarImageAdmin(admin.ModelAdmin):
 admin.site.register(Order)
 admin.site.register(Order_item)
 admin.site.register(Ship_adress)
-admin.site.register(Customer)
 # Register your models here.

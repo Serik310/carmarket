@@ -1,5 +1,5 @@
 {% load humanize %}
-
+<html>
 <head>
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
@@ -113,9 +113,9 @@
                     </div>
                     <!--SHIPPING METHOD END-->
                     <!--CREDIT CART PAYMENT-->
-                    <div class="panel panel-info">
+                    <div class="panel panel-info" >
                         <div class="panel-heading"><span><i class="glyphicon glyphicon-lock"></i></span> Secure Payment</div>
-                        <div class="panel-body">
+                        <div class="panel-body" id = "shipping-info">
                             <div class="form-group">
                                 <div class="col-md-12"><strong>Card Type:</strong></div>
                                 <div class="col-md-12">
@@ -202,4 +202,20 @@
         
             </div>
     </div>
+    <script>
+        var shipping = '{{order.shipping}}'
+
+        if(shipping == 'False') {
+            document.getElementById('shipping-info').innerHTML = '' 
+        }
+        
+        var form = document.getElementById('form')
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault()
+            console.log('Form submited..')
+
+        })
+    </script>
     </body>
+</html>
