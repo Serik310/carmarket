@@ -3,7 +3,6 @@
 {% load humanize %}
 {% load crispy_forms_tags %}
 {% block search %}
-<input id = "search_here" class = "form-control" placeholder = "Введите название автомобиля...">
 {% endblock %}
 {% block content %}
 {% if advert_car_num == 1 %}
@@ -62,7 +61,6 @@
     var slideIndex = 1;
 showSlides(slideIndex);
 
-// Thumbnail image controls
 function currentSlide(n) {
   showSlides(slideIndex = n);
 }
